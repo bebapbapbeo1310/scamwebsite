@@ -1,0 +1,32 @@
+$(document).ready(function () {
+  const $netEasePromotionModal = $("#netease-promotion-modal");
+  // Check if NetEase Modal Is present on Page Return if component NOT found
+  if ($netEasePromotionModal.length == 0) {
+    return;
+  }
+
+  if (
+    $netEasePromotionModal.closest(".geo-loc-wrapper-edit-content").length > 0
+  ) {
+    $netEasePromotionModal.remove();
+    return;
+  }
+
+  //Clear modal-class from body Tag if it exists
+  if ($netEasePromotionModal.parents("body").hasClass("modal-open")) {
+    $netEasePromotionModal.parents("body").removeClass("modal-open");
+  }
+
+  // show modal only if geo location wrapper is visible
+  const geoLocationWrapper = document.querySelector(".geo-location-wrapper-v2");
+  if (geoLocationWrapper.offsetParent) {
+    $netEasePromotionModal.parents("body").addClass("modal-open");
+    $netEasePromotionModal.addClass("show");
+  }
+
+  $("#popup-btn").on("click", function () {
+    $netEasePromotionModal.find("show");
+    $netEasePromotionModal.removeClass("show");
+    $netEasePromotionModal.parents("body").removeClass("modal-open");
+  });
+});
